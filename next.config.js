@@ -4,7 +4,7 @@ module.exports = {
       return [
         {
           source: '/api/:path*',
-          destination: 'http://localhost:8080/:path*', // Change to your GeoServer URL
+          destination: 'http://localhost:8080/:path*', 
         },
       ];
     },
