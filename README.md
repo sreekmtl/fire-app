@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This app uses geoserver in the backend to load and display layers (except base map layers). Set up your own geoserver or any other data source for the app to work properly
 
 ## Getting Started
 
