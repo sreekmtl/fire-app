@@ -8,7 +8,7 @@ const Intro = () => {
         <div className='relative z-20 flex flex-1 flex-col xl:w-1/2'>
             <h1 className='text-black bold-32 lg:bold-52 '>Welcome to <span className='text-red-500'>Fire-App</span> </h1>
              <p className="regular-16 mt-6 text-black xl:max-w-[520px]">
-                See fire locations using the power of Remote Sensing Data.
+                See fire locations using the power of Remote Sensing Data.This app uses Sentinel-2 data to detect active fire locations and burnt area
                 Open our web app to explore.
              </p>
 

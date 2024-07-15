@@ -30,15 +30,7 @@ const config: Config = {
           50: '#FEC601',
         },
       },
-      backgroundImage: {
-        'bg-img-1': "url('/stadium3.jpg')",
-        'bg-img-2': "url('/stadium4.jpg')",
-        'feature-bg': "url('/feature-bg.png')",
-        pattern: "url('/pattern.png')",
-        'pattern-2': "url('/pattern-bg.png')",
-        'intro-cover':"url('/cover.JPG')",
-        
-      },
+      
       screens: {
         xs: '400px',
         '3xl': '1680px',

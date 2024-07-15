@@ -7,20 +7,19 @@ import Sources from '@/mapOperations/sources';
 import { fromLonLat } from 'ol/proj';
 
 let src = new Sources();
-let overlayLayer= null;
 
 const page = () => {
-
-    const overlayRef = useRef(null);
 
     let defaultLocation= '';
     let defaultProduct= 'fire';
 
     const [source, setSource] = useState(src.EsriMaps);
     const [product, setProduct]= useState(defaultProduct)
-    const [location, setLocation]= useState(defaultLocation);
+    const [geolocation, setLocation]= useState(defaultLocation);
     const [mapLocation, setMapLocation]= useState([8687373.06, 3544749.53]);
     const [selectedDate, setSelectedDate] = useState(null);
+    const [overlayLayer, setOverlayLayer] = useState(null);
+    const [legendImg, setLegendImg]=useState('');
 
 
     const handleBaseMapChange = (event) => {
@@ -44,27 +43,35 @@ const page = () => {
     };
 
     const handleZoomToLocation= ()=>{
-      const [longitude, latitude]= location.split(',').map(Number);
-      const loc_epsg3857= fromLonLat([longitude,latitude]);
-      console.log(loc_epsg3857);
-      //overlayLayer= src.nbr;
+      if (geolocation==='') {
+        alert('Enter a valid location');
+      }else{
+        const [longitude, latitude]= geolocation.split(',').map(Number);
+        const loc_epsg3857= fromLonLat([longitude,latitude]);
+        setMapLocation(loc_epsg3857);
+      }
       
+    };
+
+
+    const handleAddLayer=()=>{
+      const loc_epsg3857= fromLonLat([78,30]);
+      setMapLocation(loc_epsg3857);
       if (selectedDate && (product==='fire')){
-        setMapLocation(loc_epsg3857);
         let dateString= selectedDate.toISOString().split('T')[0]
-        overlayLayer=src.overlayWFS(product+'-'+dateString );
+        setOverlayLayer(src.overlayWFS(product+'-'+dateString ));
       }else if (selectedDate && (product==='dnbr')){
-        setMapLocation(loc_epsg3857);
         let dateString= selectedDate.toISOString().split('T')[0]
-        overlayLayer= src.overlayWMS(product+'-'+dateString);
+        setOverlayLayer(src.overlayWMS(product+'-'+dateString)[0]);
+        setLegendImg(src.overlayWMS(product+'-'+dateString)[1]);
       }else {
         alert('Enter Date');
       }
-    };
+      
+    }
 
   const handleClearAll = () => {
-      overlayRef.current = null;
-      setMapLocation(null);
+      location.reload();
   };
 
   return (
@@ -80,7 +87,9 @@ const page = () => {
         handleZoomToLocation={handleZoomToLocation}
         selectedDate={selectedDate}
         handleDateChange={handleDateChange}
-        handleClearAll={handleClearAll} />
+        handleClearAll={handleClearAll}
+        handleAddLayer={handleAddLayer}
+        legendImg={legendImg} />
 
     </div>
     </>

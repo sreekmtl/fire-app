@@ -86,13 +86,6 @@ body {
   .regular-14 {
     @apply text-[14px] font-[400];
   }
-  .medium-22 {
-    @apply text-[22px] font-[600];
-  }
-
-  .medium-14 {
-    @apply text-[14px] font-[600];
-  }
 
   .bold-88 {
     @apply text-[88px] font-[700] leading-[120%];

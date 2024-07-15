@@ -31,23 +31,6 @@ class Sources{
   
           });
 
-          this.nbr= new TileLayer({
-            source:new TileWMS({
-            url: 'http://localhost:8080/geoserver/tiger/wms?SERVICE=WMS',
-            params: {'LAYERS': 'Apoly_landmarks', 
-            'TILED': true,
-            'VERSION':'1.1.0',
-            'BBOX':'-74.068, 40.649, -73.886, 40.912',
-            'SRS':'EPSG:4326',
-            'WIDTH':256,
-            'HEIGHT':256,
-            'FORMAT':'image/png'
-  
-          },
-            serverType: 'geoserver',
-            //crossOrigin: 'Anonymous',
-          })
-          })
 
  }
 
@@ -87,8 +70,7 @@ class Sources{
   }
 
   overlayWMS(layer){
-    return new TileLayer({
-      source:new TileWMS({
+    let wmsSource=new TileWMS({
       url: 'http://localhost:8080/geoserver/fireDetection/wms?SERVICE=WMS',
       params: {'LAYERS': layer, 
       'TILED': true,
@@ -103,7 +85,12 @@ class Sources{
       serverType: 'geoserver',
       //crossOrigin: 'Anonymous',
     })
-    })
+
+    let wmsLegend= wmsSource.getLegendUrl()
+
+    return [new TileLayer({
+      source:wmsSource,
+    }), wmsLegend];
   }
 
 }
