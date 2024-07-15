@@ -27,7 +27,7 @@ function Mapcomponent({source, location, layer}){
         if (location) {
             const view = map.getView();
             view.setCenter(location);
-            view.setZoom(8); // Adjust the zoom level as needed
+            view.setZoom(8); 
         }
 
         if(layer){
